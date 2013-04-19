@@ -1,0 +1,11 @@
+*.class
+/build/classes/controller/*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+/nbproject/private/
+/nbproject/
+/build/
+/dist/
