@@ -3,7 +3,7 @@ package view;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
-import model.ServicosLogica;
+import controller.Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,10 +13,10 @@ import javax.swing.JPanel;
 public class JanelaPrincipal extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
-    ServicosLogica servicosLogica;
+    Controller servicosLogica;
     BarraDeMenu barraDeMenu;
 
-    public JanelaPrincipal(ServicosLogica logica) {
+    public JanelaPrincipal(Controller logica) {
         super("SisCommerce");
         this.servicosLogica = logica;
         barraDeMenu = new BarraDeMenu(this);

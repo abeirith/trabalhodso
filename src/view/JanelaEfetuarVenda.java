@@ -4,7 +4,7 @@
  */
 package view;
 
-import model.ServicosLogica;
+import controller.Controller;
 
 /**
  *
@@ -15,7 +15,7 @@ public class JanelaEfetuarVenda extends javax.swing.JFrame {
     /**
      * Creates new form JanelaEfetuarVenda
      */
-    public JanelaEfetuarVenda(ServicosLogica servicosLogica, JanelaPrincipal janelaPrincipal) {
+    public JanelaEfetuarVenda(Controller servicosLogica, JanelaPrincipal janelaPrincipal) {
         super("Efeturar venda - SisCommerce");
         setResizable(false);
         setDefaultCloseOperation(JanelaEfetuarVenda.EXIT_ON_CLOSE);

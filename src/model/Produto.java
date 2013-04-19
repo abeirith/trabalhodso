@@ -1,47 +1,57 @@
 package model;
 
-public class Produto {
+public class Produto implements java.io.Serializable {
 
-	String tipo;
-	String marca;
-	String titulo;
-        String localNoArquivo;
-	
-	public Produto(String tipo,  String marca, String titulo ) {
-		this.tipo = tipo;
-		this.marca = marca;
-		this.titulo = titulo;	
-	}
-        
-        public Produto(String localNoArquivo ) {
-		this.localNoArquivo = localNoArquivo;
-	}
-        
-        public void setTipo(String tipo){
-            this.tipo = tipo;
-        }
-        
-        public void setMarca(String marca){
-            this.marca = marca;
-        }
-        
-        public void setTitulo(String titulo){
-            this.titulo = titulo;
-        }
-        
-        public String getTipo(){
-            return tipo;
-        }
-        
-        public String getMarca(){
-            return marca;
-        }
-        
-        public String getTitulo(){
-            return titulo;
-        }
+    private static final long serialVersionUID = 1L;
+    String tipo, marca, titulo;
+    int quantidade;
+    int valor;
 
-        public String getlocalNoArquivo(){
-            return localNoArquivo;
-        }
+    public Produto(String tipo, String marca, String titulo, int quantidade, int valor) {
+        this.tipo = tipo;
+        this.marca = marca;
+        this.titulo = titulo;
+        this.quantidade = quantidade;
+        this.valor = valor;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+    
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+    
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+    
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public int getValor() {
+        return valor;
+    }    
 }

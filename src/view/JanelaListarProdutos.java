@@ -11,7 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import model.ExcecaoErroDePersistencia;
 import model.Produto;
-import model.ServicosLogica;
+import controller.Controller;
 
 /**
  *
@@ -25,13 +25,13 @@ public class JanelaListarProdutos extends javax.swing.JFrame {
     int posicaoNaLista;
     List<Long> listaPosicaoProdutoNoAquivo;
     Produto produto;
-    ServicosLogica servicosLogica;
+    Controller servicosLogica;
     JanelaPrincipal interfaceUsuario;
 
     /**
      * Creates new form JanelaListarProdutos
      */
-    public JanelaListarProdutos(ServicosLogica servicosLogica, JanelaPrincipal janelaPrincipal) {
+    public JanelaListarProdutos(Controller servicosLogica, JanelaPrincipal janelaPrincipal) {
         super("Listar produtos - SisCommerce");
         setResizable(false);
         setDefaultCloseOperation(JanelaListarProdutos.EXIT_ON_CLOSE);
@@ -50,34 +50,6 @@ public class JanelaListarProdutos extends javax.swing.JFrame {
     
     public void interaja() {
         setVisible(true);
-    }
-
-    private void eventoLocalizarProduto(ActionEvent e, String tagEscolhida) throws ExcecaoErroDePersistencia {
-
-        String tag = "";
-
-        String tagRequisitada = tagEscolhida;
-        if (tagEscolhida.endsWith("tipo")) {
-            tag = campoTipo.getSelectedItem().toString();
-        } else if (tagEscolhida.endsWith("marca")) {
-            tag = campoMarca.getSelectedItem().toString();
-        } else {
-            tag = campoTitulo.getText();
-        }
-
-
-        this.listaProdutosParaExibir = new ArrayList<Produto>();
-        posicaoDoProdutoNaLista = -1;
-
-        this.listaProdutosParaExibir = servicosLogica.localizarProduto(tag, tagRequisitada);
-
-        if (this.listaProdutosParaExibir == null || this.listaProdutosParaExibir.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Não existe produto para " + tagEscolhida + ": " + tag, "Atenção", 1);
-        }
-    }
-
-    private void removerProduto(Produto produto) throws ExcecaoErroDePersistencia {
-        servicosLogica.removerProduto(produto, 100L);
     }
 
     /**

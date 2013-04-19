@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import model.ExcecaoErroDePersistencia;
 import model.Produto;
-import model.ServicosLogica;
+import controller.Controller;
 
 /**
  *
@@ -18,13 +18,13 @@ import model.ServicosLogica;
 public class JanelaCadastrarProduto extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
-    ServicosLogica servicosLogica;
+    Controller servicosLogica;
     JanelaPrincipal interfaceUsuario;
 
     /**
      * Creates new form JanelaCadastrarProduto
      */
-    public JanelaCadastrarProduto(ServicosLogica servicosLogica, JanelaPrincipal interfaceUsuario) {
+    public JanelaCadastrarProduto(Controller servicosLogica, JanelaPrincipal interfaceUsuario) {
         super("Cadastrar Produto - SisCommerce");
         this.servicosLogica = servicosLogica;
         this.interfaceUsuario = interfaceUsuario;
@@ -41,7 +41,7 @@ public class JanelaCadastrarProduto extends javax.swing.JFrame {
 
     private void eventoBotaoCadastrarProduto(ActionEvent e) throws ExcecaoErroDePersistencia, FileNotFoundException, IOException {
 
-        Produto produto = new Produto(campoTipo.getSelectedItem().toString(), campoMarca.getSelectedItem().toString(), campoTitulo.getText());
+        Produto produto = new Produto(campoTipo.getSelectedItem().toString(), campoMarca.getSelectedItem().toString(), campoTitulo.getText(), Integer.parseInt(campoQuantidade.getValue().toString()) , Integer.parseInt(campoValor.getText()));
 
         campoTitulo.setText(null);
 
@@ -69,14 +69,14 @@ public class JanelaCadastrarProduto extends javax.swing.JFrame {
         textoUnidade = new javax.swing.JLabel();
         textoSabor = new javax.swing.JLabel();
         textoEstoque = new javax.swing.JLabel();
-        textoPreco = new javax.swing.JLabel();
+        textoValor = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jSpinner1 = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
+        campoQuantidade = new javax.swing.JSpinner();
         jComboBox1 = new javax.swing.JComboBox();
         jComboBox2 = new javax.swing.JComboBox();
-        jTextField1 = new javax.swing.JTextField();
+        campoValor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,7 +111,7 @@ public class JanelaCadastrarProduto extends javax.swing.JFrame {
 
         textoEstoque.setText("Estoque");
 
-        textoPreco.setText("Preço");
+        textoValor.setText("Valor");
 
         jButton1.setText("Cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -147,8 +147,8 @@ public class JanelaCadastrarProduto extends javax.swing.JFrame {
                                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(36, 36, 36)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textoPreco)))
+                                    .addComponent(campoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textoValor)))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -165,7 +165,7 @@ public class JanelaCadastrarProduto extends javax.swing.JFrame {
                                         .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(textoQuantidade)
-                                                .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(campoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGap(40, 40, 40)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(textoSabor)
@@ -212,15 +212,15 @@ public class JanelaCadastrarProduto extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(campoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textoEstoque)
-                            .addComponent(textoPreco))
+                            .addComponent(textoValor))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(campoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(textoSabor)
@@ -250,8 +250,10 @@ public class JanelaCadastrarProduto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox campoMarca;
+    private javax.swing.JSpinner campoQuantidade;
     private javax.swing.JComboBox campoTipo;
     private javax.swing.JTextField campoTitulo;
+    private javax.swing.JTextField campoValor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
@@ -259,15 +261,13 @@ public class JanelaCadastrarProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel textoEstoque;
     private javax.swing.JLabel textoMarca;
-    private javax.swing.JLabel textoPreco;
     private javax.swing.JLabel textoQuantidade;
     private javax.swing.JLabel textoSabor;
     private javax.swing.JLabel textoTipo;
     private javax.swing.JLabel textoTitulo;
     private javax.swing.JLabel textoUnidade;
+    private javax.swing.JLabel textoValor;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,23 +1,19 @@
 package controller;
 
 import view.JanelaPrincipal;
-import model.ServicosLogica;
-import model.ServicosPersistencia;
+import model.Persistencia;
 
 public class Programa {
 
-	public static void main(String args[]) {
-		JanelaPrincipal jp;
-		ServicosLogica logica;
-		ServicosPersistencia persistencia;
-		
-		persistencia = new ServicosPersistencia();
-		logica = new ServicosLogica(persistencia);
-		jp = new JanelaPrincipal(logica);
-		
-                System.out.println("Teste");
-                
-		jp.interaja();
-	}
-	
+    public static void main(String args[]) {
+        JanelaPrincipal jp;
+        Persistencia persistencia;
+        Controller logica;
+
+        persistencia = new Persistencia();
+        logica = new Controller(persistencia);
+        jp = new JanelaPrincipal(logica);
+
+        jp.interaja();
+    }
 }
