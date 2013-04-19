@@ -15,6 +15,8 @@ public class Programa {
 		logica = new ServicosLogica(persistencia);
 		jp = new JanelaPrincipal(logica);
 		
+                System.out.println("Teste");
+                
 		jp.interaja();
 	}
 	
