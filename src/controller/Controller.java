@@ -55,22 +55,20 @@ public class Controller {
         servicoEstoque.registrarProdutoEmArquivo(listaProdutos);
     }
 
-    public void venderProduto(Produto produto) throws Exception {
+    public void venderProduto(Produto produto, int quantidade) throws Exception {
 
         List<Produto> listaProdutos = servicoEstoque.conferirEstoque();
-
-        
-
+ 
         if (listaProdutos != null) {
             
              for (Produto produtoExistente : listaProdutos) {
                 int posicao = 0;
                 if (produtoExistente.getMarca().equals(produto.getMarca())) {
                     
-                    if(produto.getQuantidade() > produtoExistente.getQuantidade() ){
+                    if(quantidade > produtoExistente.getQuantidade() ){
                         throw  new Exception("Quantidade em estoque insuficiente");
                     }else{
-                    int quantidadeAtualizada = produtoExistente.getQuantidade() - produto.getQuantidade();
+                    int quantidadeAtualizada = produtoExistente.getQuantidade() - quantidade;
                     produtoExistente.setQuantidade(quantidadeAtualizada);
                     listaProdutos.set(posicao, produtoExistente);
                     posicao++;
