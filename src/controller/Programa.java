@@ -1,7 +1,7 @@
 package controller;
 
 import view.JanelaPrincipal;
-import model.Persistencia;
+import persistencia.Persistencia;
 
 public class Programa {
 
@@ -9,9 +9,11 @@ public class Programa {
         JanelaPrincipal jp;
         Persistencia persistencia;
         Controller logica;
+        Estoque estoque;
 
         persistencia = new Persistencia();
-        logica = new Controller(persistencia);
+        estoque = new Estoque(persistencia);
+        logica = new Controller(estoque);
         jp = new JanelaPrincipal(logica);
 
         jp.interaja();

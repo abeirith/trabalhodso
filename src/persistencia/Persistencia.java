@@ -1,4 +1,4 @@
-package model;
+package persistencia;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
+import model.Produto;
 
 public class Persistencia {
 
-    public void registrarEmArquivo(ArrayList<Produto> listaProdutos) {
+    public void registrarEmArquivo(List<Produto> listaProdutos) {
 
         serializarListaProdutos(listaProdutos, "D:\\Produtos.dat");
 
@@ -20,7 +22,7 @@ public class Persistencia {
         return listaProdutos = deserializarListaProdutos(arquivo);
     }
 
-    private static void serializarListaProdutos(ArrayList<Produto> listaProdutos, String arquivo) {
+    private static void serializarListaProdutos(List<Produto> listaProdutos, String arquivo) {
 
         FileOutputStream arq = null;
         ObjectOutputStream out = null;
@@ -51,13 +53,9 @@ public class Persistencia {
         ObjectInputStream in = null;
         ArrayList<Produto> lista = null;
         try {
-//arquivo onde estao os dados serializados
+
             arqLeitura = new FileInputStream(arquivo);
-
-//objeto que vai ler os dados do arquivo
             in = new ObjectInputStream(arqLeitura);
-
-//recupera os dados
             lista = (ArrayList<Produto>) in.readObject();
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
@@ -74,9 +72,4 @@ public class Persistencia {
 
         return lista;
     }
-
-    /*ArrayList<tenis> listaRecuperada = deserializaListaTenis("D:\serializados.dat");
-     for (Tenis t : listaRecuperada) {
-     System.out.println(t);
-     }*/
 }

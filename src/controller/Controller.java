@@ -5,63 +5,85 @@
 package controller;
 
 import model.Produto;
-import model.Estoque;
 import java.util.ArrayList;
-
-import model.Persistencia;
+import java.util.List;
 
 /**
  *
  * @author beirith
  */
 public class Controller {
-    
-    Persistencia persistencia;
-    ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
+
     Produto produto;
-    Estoque estoque;
+    Estoque servicoEstoque;
 
-    public Controller(Persistencia persistencia) {
+    public Controller(Estoque estoque) {
 
-        this.persistencia = persistencia;
-    }
-
-    public void abrirArquivo(String arquivo) {
-        persistencia.abrirArquivo(arquivo);
+        this.servicoEstoque = estoque;
     }
 
     public void adicionarProduto(Produto produto) {
 
-        int quantidadeEmEstoque;
 
-// se o produto não existir adiciona-lo... {
-        estoque.AlterarQuantidadeEmEstoque(produto, produto.getQuantidade());
-// }
-// else {
-        quantidadeEmEstoque = estoque.VerificarQuantidadeEmEstoque(produto);
-        quantidadeEmEstoque += produto.getQuantidade();
-        estoque.AlterarQuantidadeEmEstoque(produto, quantidadeEmEstoque);
-// }
+        List<Produto> listaProdutos = servicoEstoque.conferirEstoque();
 
-        listaProdutos.add(produto);
-        persistencia.registrarEmArquivo(listaProdutos);
+        if (listaProdutos == null) {
+            listaProdutos = new ArrayList<Produto>();
+            listaProdutos.add(produto);
+        } else {
+
+            boolean produtoEncontrado = false;
+            for (Produto produtoExistente : listaProdutos) {
+                int posicao = 0;
+                if (produtoExistente.getMarca().equals(produto.getMarca())) {
+                    int quantidadeAtualizada = produtoExistente.getQuantidade() + produto.getQuantidade();
+                    produtoExistente.setQuantidade(quantidadeAtualizada);
+                    listaProdutos.set(posicao, produtoExistente);
+                    produtoEncontrado = true;
+                    break;
+                }
+                posicao++;
+
+            }
+            if (produtoEncontrado == false) {
+                listaProdutos.add(produto);
+            }
+
+        }
+
+        servicoEstoque.atualizarEstoque(listaProdutos);
+        servicoEstoque.registrarProdutoEmArquivo(listaProdutos);
     }
 
-    public void venderProduto(Produto produto, int quantidade) {
+    public void venderProduto(Produto produto) throws Exception {
 
-        int quantidadeEmEstoque;
+        List<Produto> listaProdutos = servicoEstoque.conferirEstoque();
 
-        quantidadeEmEstoque = estoque.VerificarQuantidadeEmEstoque(produto);
-        quantidadeEmEstoque -= quantidade;
-        estoque.AlterarQuantidadeEmEstoque(produto, quantidadeEmEstoque);
+        
 
-// tem que atualizar array list ... listaProdutos.add(produto);
+        if (listaProdutos != null) {
+            
+             for (Produto produtoExistente : listaProdutos) {
+                int posicao = 0;
+                if (produtoExistente.getMarca().equals(produto.getMarca())) {
+                    
+                    if(produto.getQuantidade() > produtoExistente.getQuantidade() ){
+                        throw  new Exception("Quantidade em estoque insuficiente");
+                    }else{
+                    int quantidadeAtualizada = produtoExistente.getQuantidade() - produto.getQuantidade();
+                    produtoExistente.setQuantidade(quantidadeAtualizada);
+                    listaProdutos.set(posicao, produtoExistente);
+                    posicao++;
+                    break;
+                    }
+                }
+                else{
+                    throw new Exception("Produto Inexistente");
+                }
 
-        persistencia.registrarEmArquivo(listaProdutos);
+            }
+        }
+        servicoEstoque.atualizarEstoque(listaProdutos);
 
     }
-
-    public void alterarQuantidadeEmEstoque(String descricao, int quantidade) {
-    }
-    
 }

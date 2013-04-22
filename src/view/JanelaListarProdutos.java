@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import model.ExcecaoErroDePersistencia;
+import persistencia.ExcecaoErroDePersistencia;
 import model.Produto;
 import controller.Controller;
 

@@ -1,4 +1,4 @@
-package model;
+package persistencia;
 
 public class ExcecaoErroDePersistencia extends Exception {
 
