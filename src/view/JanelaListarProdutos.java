@@ -23,10 +23,7 @@ import javax.swing.DefaultListModel;
 public class JanelaListarProdutos extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
-    int posicaoDoProdutoNaLista;
-    Produto produto;
     Controller servicosLogica;
-    JanelaPrincipal interfaceUsuario;
     List<Produto> listaProdutos;
 
     /**
@@ -40,11 +37,7 @@ public class JanelaListarProdutos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         this.servicosLogica = servicosLogica;
-        this.produto = null;
-        
-
-        posicaoDoProdutoNaLista = 0;
-
+       
         initComponents();
     }
     
