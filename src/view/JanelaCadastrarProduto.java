@@ -38,16 +38,6 @@ public class JanelaCadastrarProduto extends javax.swing.JFrame {
     public void interaja() {
         setVisible(true);
     }
-
-    private void eventoBotaoCadastrarProduto(ActionEvent e) throws ExcecaoErroDePersistencia, FileNotFoundException, IOException {
-
-        Produto produto = new Produto(campoTipo.getSelectedItem().toString(), campoMarca.getSelectedItem().toString(), campoTitulo.getText(), Integer.parseInt(campoQuantidade.getValue().toString()) , Integer.parseInt(campoValor.getText()));
-
-        campoTitulo.setText(null);
-
-        servicosLogica.adicionarProduto(produto);
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,8 +60,8 @@ public class JanelaCadastrarProduto extends javax.swing.JFrame {
         textoSabor = new javax.swing.JLabel();
         textoEstoque = new javax.swing.JLabel();
         textoValor = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        cadastrar = new javax.swing.JButton();
+        cancelar = new javax.swing.JButton();
         jSpinner1 = new javax.swing.JSpinner();
         campoQuantidade = new javax.swing.JSpinner();
         jComboBox1 = new javax.swing.JComboBox();
@@ -113,14 +103,19 @@ public class JanelaCadastrarProduto extends javax.swing.JFrame {
 
         textoValor.setText("Valor");
 
-        jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cadastrar.setText("Cadastrar");
+        cadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cadastrarProduto(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
+        cancelar.setText("Cancelar");
+        cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairTela(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gramas", "Comprimidos", "Cápsulas" }));
 
@@ -136,9 +131,9 @@ public class JanelaCadastrarProduto extends javax.swing.JFrame {
                     .addComponent(jSeparator1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(cadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
+                        .addComponent(cancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -228,8 +223,8 @@ public class JanelaCadastrarProduto extends javax.swing.JFrame {
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(cadastrar)
+                    .addComponent(cancelar))
                 .addContainerGap())
         );
 
@@ -244,18 +239,31 @@ public class JanelaCadastrarProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoMarcaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void cadastrarProduto(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarProduto
+
+        Produto produto = new Produto(campoTipo.getSelectedItem().toString(), campoMarca.getSelectedItem().toString(), campoTitulo.getText(), Integer.parseInt(campoQuantidade.getValue().toString()) , Integer.parseInt(campoValor.getText()));
+
+        campoTitulo.setText(null);
+
+        servicosLogica.adicionarProduto(produto);
+        
+        setVisible(false);
+        
+
+    }//GEN-LAST:event_cadastrarProduto
+
+    private void sairTela(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairTela
+        setVisible(false);
+    }//GEN-LAST:event_sairTela
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cadastrar;
     private javax.swing.JComboBox campoMarca;
     private javax.swing.JSpinner campoQuantidade;
     private javax.swing.JComboBox campoTipo;
     private javax.swing.JTextField campoTitulo;
     private javax.swing.JTextField campoValor;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancelar;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;

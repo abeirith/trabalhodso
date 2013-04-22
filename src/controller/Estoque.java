@@ -44,6 +44,6 @@ public class Estoque {
     }
 
     public List<Produto> conferirEstoque() {
-        return persistencia.abrirArquivo("D:\\Produtos.dat");
+        return persistencia.abrirArquivo("C:\\DSO\\produtos.txt");
     }
 }

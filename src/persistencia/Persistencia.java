@@ -13,13 +13,13 @@ public class Persistencia {
 
     public void registrarEmArquivo(List<Produto> listaProdutos) {
 
-        serializarListaProdutos(listaProdutos, "D:\\Produtos.dat");
+        serializarListaProdutos(listaProdutos, "C:\\DSO\\produtos.txt");
 
     }
 
     public ArrayList<Produto> abrirArquivo(String arquivo) {
-        ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
-        return listaProdutos = deserializarListaProdutos(arquivo);
+         ArrayList<Produto> listaProdutos = deserializarListaProdutos(arquivo);
+         return listaProdutos;
     }
 
     private static void serializarListaProdutos(List<Produto> listaProdutos, String arquivo) {

@@ -16,6 +16,7 @@ public class Controller {
 
     Produto produto;
     Estoque servicoEstoque;
+    List<Produto> listaProdutos;
 
     public Controller(Estoque estoque) {
 
@@ -35,7 +36,7 @@ public class Controller {
             boolean produtoEncontrado = false;
             for (Produto produtoExistente : listaProdutos) {
                 int posicao = 0;
-                if (produtoExistente.getMarca().equals(produto.getMarca())) {
+                if (produtoExistente.getTitulo().equals(produto.getTitulo())) {
                     int quantidadeAtualizada = produtoExistente.getQuantidade() + produto.getQuantidade();
                     produtoExistente.setQuantidade(quantidadeAtualizada);
                     listaProdutos.set(posicao, produtoExistente);
@@ -51,7 +52,6 @@ public class Controller {
 
         }
 
-        servicoEstoque.atualizarEstoque(listaProdutos);
         servicoEstoque.registrarProdutoEmArquivo(listaProdutos);
     }
 
@@ -63,7 +63,7 @@ public class Controller {
             
              for (Produto produtoExistente : listaProdutos) {
                 int posicao = 0;
-                if (produtoExistente.getMarca().equals(produto.getMarca())) {
+                if (produtoExistente.getTitulo().equals(produto.getTitulo())) {
                     
                     if(quantidade > produtoExistente.getQuantidade() ){
                         throw  new Exception("Quantidade em estoque insuficiente");
@@ -83,5 +83,11 @@ public class Controller {
         }
         servicoEstoque.atualizarEstoque(listaProdutos);
 
+    }
+    
+    public List<Produto> listarProdutos(){
+       listaProdutos = servicoEstoque.conferirEstoque();
+       return listaProdutos;
+       
     }
 }
